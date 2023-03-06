@@ -6,7 +6,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Http\Resources\UsersResource;
 
-class AdminController extends Controller
+class UsersController extends Controller
 {
     // GET
     public function index()

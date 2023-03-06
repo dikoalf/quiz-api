@@ -26,10 +26,7 @@ class UserAuthController extends Controller
 
             $user = Users::createData($data);
 
-            $token = $user->createToken('API Token')->accessToken;
-
             $response['data'] = new UsersResource($user);
-            $response['token'] = $token;
         }
         catch (\Exception $e)
         {

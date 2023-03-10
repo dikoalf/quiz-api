@@ -59,9 +59,18 @@ class UsersController extends Controller
 
         try
         {
-            $user = Users::updateData($id, $request);
+            $checkEmail = Users::getEmail($request['email']);
+
+            if(empty($checkEmail) || $checkEmail['id'] == $id)
+            {
+                $user = Users::updateData($id, $request);
             
-            $errorMessage = empty($user) ? "" : $user;
+                $errorMessage = empty($user) ? '' : 'Failed to update data';
+            }
+            else
+            {
+                $errorMessage = 'Email already exist';
+            }
         }
         catch (\Exception $e)
         {
@@ -69,7 +78,7 @@ class UsersController extends Controller
         }
         
         $response['code'] = empty($errorMessage) ? '00' : '04';
-        $response['message'] = empty($errorMessage) ? 'Data successfully updated' : 'Failed to update data';
+        $response['message'] = empty($errorMessage) ? 'Data successfully updated' : $errorMessage;
 
         return $response;
     }

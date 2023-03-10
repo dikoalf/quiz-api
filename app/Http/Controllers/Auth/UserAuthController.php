@@ -20,13 +20,20 @@ class UserAuthController extends Controller
         {
             $data = $request->validate([
                 'name' => 'required|max:255',
-                'email' => 'required|email|unique:users',
+                'email' => 'required|email',
                 'password' => 'required'
             ]);
 
-            $user = Users::createData($data);
+            if(empty(Users::getEmail($request['email'])))
+            {
+                $user = Users::createData($data);
 
-            $response['data'] = new UsersResource($user);
+                $response['data'] = new UsersResource($user);
+            }
+            else
+            {
+                $errorMessage = 'Email already exist';
+            }
         }
         catch (\Exception $e)
         {

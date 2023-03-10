@@ -36,6 +36,13 @@ class Users extends Model
         return $user;
     }
 
+    function getEmail($email)
+    {
+        $findEmail = Users::where('email', $email)->get()->first();
+
+        return $findEmail;
+    }
+
     function createData($data)
     {
         DB::beginTransaction();
@@ -60,7 +67,7 @@ class Users extends Model
     function updateData($id, $data)
     {
         DB::beginTransaction();
-        
+
         try 
         {
             Users::findOrFail($id)->update([

@@ -34,7 +34,7 @@ class UsersController extends Controller
     {
         $errorMessage = "";
         $data = [];
-        
+
         try 
         {
             $data = Users::show($id);
@@ -56,7 +56,7 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $errorMessage = "";
-        echo $id;
+
         try
         {
             $user = Users::updateData($id, $request);

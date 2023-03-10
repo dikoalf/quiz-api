@@ -54,11 +54,11 @@ class QuizController extends Controller
     public function create(Request $request)
     {
         $errorMessage = "";
-        
+
         try
         {
-            $data = json_decode($request['data'], true);
-
+            $data = json_decode(stripslashes($request['data']), true);
+            
             $quiz = Quiz::createData($data);
             
             $errorMessage = empty($quiz) ? "" : $quiz;

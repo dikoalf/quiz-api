@@ -19,7 +19,7 @@ class Quiz extends Model
         if($type == 'all'){
             $quiz = Quiz::get();
         }else{
-            $quiz = Quiz::limit(10)->inRandomOrder()->where('score', '<=', 100)->groupBy('id')->havingRaw('SUM(score) <= 100')->get();
+            $quiz = Quiz::where('score', '<=', 100)->groupBy('id')->havingRaw('SUM(score) <= 100')->limit(10)->inRandomOrder()->get();
         }
 
         return $quiz;
@@ -27,9 +27,9 @@ class Quiz extends Model
 
     function show($id)
     {
-        $quiz = Quiz::where('id', $id)->get()->first;
+        $quiz = Quiz::where('id', $id)->get()->first();
         
-        return $quiz->first();
+        return $quiz;
     }
 
     function createData($data)
@@ -78,7 +78,7 @@ class Quiz extends Model
         
         try 
         {
-            Quiz::findOrFail($id)->delete();
+            Quiz::where('id', $id)->delete();
 
             DB::commit();
             return null;

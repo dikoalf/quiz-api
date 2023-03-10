@@ -34,7 +34,7 @@ class UsersController extends Controller
     {
         $errorMessage = "";
         $data = [];
-
+        
         try 
         {
             $data = Users::show($id);
@@ -53,13 +53,13 @@ class UsersController extends Controller
 
     // PUT
 
-    public function update(Request $request, Users $Users)
+    public function update(Request $request, $id)
     {
         $errorMessage = "";
-
+        echo $id;
         try
         {
-            $user = Users::createData($request);
+            $user = Users::updateData($id, $request);
             
             $errorMessage = empty($user) ? "" : $user;
         }

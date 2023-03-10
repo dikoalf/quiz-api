@@ -31,9 +31,9 @@ class Users extends Model
 
     function show($id)
     {
-        $user = Users::where('id', $id)->get()->first;
+        $user = Users::where('id', $id)->get()->first();
         
-        return $user->first();
+        return $user;
     }
 
     function createData($data)
@@ -85,7 +85,7 @@ class Users extends Model
         
         try 
         {
-            Users::findOrFail($id)->delete();
+            Users::where('id', $id)->delete();
 
             DB::commit();
             return null;

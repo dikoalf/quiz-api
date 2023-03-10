@@ -25,7 +25,7 @@ Route::controller(UserAuthController::class)->group(function () {
 Route::middleware('auth:api')->group(function() {
     // Route::apiResource('/users', UsersController::class);
     Route::controller(UsersController::class)->group(function () {
-        Route::get('/users/{users}', 'show');
+        Route::get('/users/{id}', 'show');
         Route::get('/users', 'index');
         Route::put('/users/{id}', 'update');
         Route::delete('/users/{id}', 'destroy');
